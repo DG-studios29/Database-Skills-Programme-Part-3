@@ -1,0 +1,22 @@
+Binary Search:
+
+The binarySearch method takes an array (arr) and a target value (target) as parameters.
+It initializes two pointers, left and right, to the start and end of the array, respectively.
+It enters a loop that continues as long as left is less than or equal to right.
+Inside the loop, it calculates the middle index (mid) and compares the element at that index with the target.
+If the target is found, the method returns the index. Otherwise, it adjusts the search space by updating the left and right pointers based on whether the target is greater or less than the middle element.
+If the loop completes without finding the target, the method returns -1.
+
+Insertion Sort:
+
+The insertionSort method implements the insertion sort algorithm on the given array.
+It iterates through the array, considering each element (key) one at a time.
+For each element, it compares it with the elements to its left and shifts them to the right until it finds the correct position for the current element.
+The sorted portion of the array grows with each iteration until the entire array is sorted.
+
+Main Method:
+
+The main method initializes an array of integers.
+It performs a binary search on the unsorted array to find the target value (9) and prints the result.
+It then applies insertion sort to the array and prints the sorted array.
+Finally, it performs a binary search on the sorted array to find the target value again and prints the result.

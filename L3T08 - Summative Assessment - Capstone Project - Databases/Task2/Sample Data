@@ -1,0 +1,24 @@
+-- Insert sample data into StructuralEngineer table
+INSERT INTO StructuralEngineer (name, contact_details) VALUES
+('John Doe', 'john.doe@example.com'),
+('Jane Smith', 'jane.smith@example.com');
+
+-- Insert sample data into ProjectManager table
+INSERT INTO ProjectManager (name, contact_details) VALUES
+('Alice Brown', 'alice.brown@example.com'),
+('Bob Johnson', 'bob.johnson@example.com');
+
+-- Insert sample data into Architect table
+INSERT INTO Architect (name, contact_details) VALUES
+('Charlie Green', 'charlie.green@example.com'),
+('Dana White', 'dana.white@example.com');
+
+-- Insert sample data into Customer table
+INSERT INTO Customer (name, contact_details) VALUES
+('Eve Black', 'eve.black@example.com'),
+('Frank Blue', 'frank.blue@example.com');
+
+-- Insert sample data into Project table
+INSERT INTO Project (project_name, deadline, start_date, engineer_id, manager_id, architect_id, customer_id) VALUES
+('Project Alpha', '2024-12-31', '2024-01-01', 1, 1, 1, 1),
+('Project Beta', '2025-06-30', '2024-07-01', 2, 2, 2, 2);

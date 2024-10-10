@@ -1,0 +1,34 @@
+Create the Student table:
+CREATE TABLE Student (
+    STU_NUM CHAR(6) PRIMARY KEY,
+    STU_SNAME VARCHAR(15),
+    STU_FNAME VARCHAR(15),
+    STU_INITIAL CHAR(1),
+    STU_STARTDATE DATE,
+    COURSE_CODE CHAR(3),
+    PROJ_NUM INT(2)
+);
+Insert the first two rows:
+INSERT INTO Student (STU_NUM, STU_SNAME, STU_FNAME, STU_INITIAL, STU_STARTDATE, COURSE_CODE, PROJ_NUM)
+VALUES 
+    ('01', 'Snow', 'John', 'E', '2014-04-05', '201', 6),
+    ('02', 'Stark', 'Arya', 'C', '2017-07-12', '305', 11);
+
+List all attributes for COURSE_CODE of 305:
+SELECT * FROM Student WHERE COURSE_CODE = '305';
+
+Change the course code to 304 for student number 07:
+UPDATE Student SET COURSE_CODE = '304' WHERE STU_NUM = '07';
+
+Delete the row for Jamie Lannister:
+DELETE FROM Student WHERE STU_NUM = '03' AND STU_SNAME = 'Lannister' AND STU_FNAME = 'Jamie'
+AND STU_STARTDATE = '2012-09-05' AND COURSE_CODE = '101' AND PROJ_NUM = 2;
+
+Change PROJ_NUM to 14 for students who started before 1 January 2016 and course code at least 201:
+UPDATE Student SET PROJ_NUM = 14 WHERE STU_STARTDATE < '2016-01-01' AND COURSE_CODE >= '201';
+
+Delete all data inside the table:
+DELETE FROM Student;
+
+Delete the Student table entirely:
+DROP TABLE Student;

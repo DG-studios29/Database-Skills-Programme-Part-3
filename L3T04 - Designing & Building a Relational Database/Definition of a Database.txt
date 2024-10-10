@@ -1,0 +1,33 @@
+Definition of a Database:
+A database is a structured collection of data that is organized and stored in a way that enables efficient retrieval and manipulation. It typically includes tables, each consisting of rows and columns, and relationships between these tables. Databases are used to store, manage, and retrieve data in various applications and systems.
+
+Three Database Language Types:
+
+Data Definition Language (DDL):
+Definition: DDL defines data types and relationships within a database.
+Commands:
+CREATE: Creates tables, indexes, and other objects.
+ALTER: Modifies the structure of the database.
+DROP: Deletes tables or objects.
+
+Data Manipulation Language (DML):
+
+Definition: DML performs tasks such as inserting, updating, or deleting data.
+Commands:
+SELECT: Retrieves data from the database.
+INSERT: Adds new data to the database.
+UPDATE: Modifies existing data in the database.
+DELETE: Removes data from the database.
+
+Query Languages:
+
+Definition: Query languages, such as SQL (Structured Query Language), facilitate searching for information and computing derived information. Users can ask questions of the database and receive answers presenting data specific to the question.
+SQL:
+
+SQL is a query language used to retrieve and manipulate data in a relational database.
+As a DML, SQL consists of data change statements that modify stored data but not the schema or database objects.
+Manipulation of persistent database objects (e.g., tables or stored procedures) via SQL schema statements is considered part of a separate DDL.
+SQL includes verbs such as SELECT, INSERT INTO, UPDATE, and DELETE for data manipulation.
+
+
+Reference is Designing and Building a Relational Database 

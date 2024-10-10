@@ -1,0 +1,24 @@
+# PoisePMS
+
+PoisePMS is a Java application for managing projects and associated people in a database.
+
+## Requirements
+
+- Java 8 or later
+- MySQL
+- MySQL JDBC Driver
+
+## Setup
+
+1. Create the MySQL database and tables as per the ERD.
+2. Insert initial data into the tables.
+3. Clone the repository and navigate to the project directory.
+
+## Configuration
+
+Update the database connection details in the `PoisePMS` class.
+
+```java
+private static final String URL = "jdbc:mysql://localhost:3306/PoisePMS";
+private static final String USER = "root";
+private static final String PASSWORD = "gizmo123";

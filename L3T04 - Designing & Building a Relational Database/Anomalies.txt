@@ -1,0 +1,14 @@
+Insertion Anomaly:
+
+An example would be trying to insert a new product without having an invoice yet. Since the primary key is composite (INV_NUM, PROD_N), you cannot insert a new product without an associated invoice.
+To solve this, separate the tables as described in 2NF.
+
+Update Anomaly:
+
+If a vendor changes its name (VEND_NAME), you have to update multiple rows in the original table.
+In the 3NF structure, updates only need to be made in the VENDOR table.
+
+Deletion Anomaly:
+
+If you delete a row for a product, you lose information about the vendor (VEND_NAME) if it's not present in any other row.
+In the 3NF structure, vendor information is stored separately, so deleting a product won't result in loss of vendor information.

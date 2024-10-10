@@ -1,0 +1,251 @@
+import java.sql.*;
+import java.util.Scanner;
+
+/**
+ * PoisePMS is a project management system that interacts with a MySQL database
+ * to manage projects and associated people.
+ */
+public class PoisePMS {
+    // Database connection details
+    private static final String URL = "jdbc:mysql://localhost:3306/PoisePMS";
+    private static final String USER = "root";
+    private static final String PASSWORD = "password";
+
+    public static void main(String[] args) {
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             Scanner scanner = new Scanner(System.in)) {
+
+            // Read and Write Data
+            readProjects(connection);
+            readPeople(connection);
+
+            // Capture Information about New Projects
+            addNewProject(connection, scanner);
+
+            // Update Information about Existing Projects
+            updateProject(connection, scanner);
+
+            // Delete Data about Projects and People
+            deleteProject(connection, scanner);
+
+            // Finalise Existing Projects
+            finaliseProject(connection, scanner);
+
+            // Find Projects that Still Need to be Completed
+            findIncompleteProjects(connection);
+
+            // Find Projects Past Due Date
+            findPastDueProjects(connection);
+
+            // Find and Select Project by Number or Name
+            findProject(connection, scanner);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Reads and prints all projects from the database.
+     */
+    private static void readProjects(Connection connection) throws SQLException {
+        String query = "SELECT * FROM Project";
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            while (resultSet.next()) {
+                System.out.println("Project ID: " + resultSet.getInt("project_id"));
+                System.out.println("Project Name: " + resultSet.getString("project_name"));
+                // Print other details...
+            }
+        }
+    }
+
+    /**
+     * Reads and prints all people associated with projects from the database.
+     */
+    private static void readPeople(Connection connection) throws SQLException {
+        // Read from StructuralEngineer table
+        readTable(connection, "StructuralEngineer");
+        // Read from ProjectManager table
+        readTable(connection, "ProjectManager");
+        // Read from Architect table
+        readTable(connection, "Architect");
+        // Read from Customer table
+        readTable(connection, "Customer");
+    }
+
+    /**
+     * Reads and prints all entries from the specified table.
+     */
+    private static void readTable(Connection connection, String tableName) throws SQLException {
+        String query = "SELECT * FROM " + tableName;
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            while (resultSet.next()) {
+                System.out.println(tableName + " ID: " + resultSet.getInt(1));
+                System.out.println("Name: " + resultSet.getString("name"));
+                // Print other details based on the table...
+            }
+        }
+    }
+
+    /**
+     * Adds a new project to the database.
+     */
+    private static void addNewProject(Connection connection, Scanner scanner) throws SQLException {
+        System.out.println("Enter project name: ");
+        String projectName = scanner.nextLine();
+        System.out.println("Enter deadline (YYYY-MM-DD): ");
+        String deadline = scanner.nextLine();
+        System.out.println("Enter start date (YYYY-MM-DD): ");
+        String startDate = scanner.nextLine();
+        System.out.println("Enter engineer ID: ");
+        int engineerId = scanner.nextInt();
+        System.out.println("Enter manager ID: ");
+        int managerId = scanner.nextInt();
+        System.out.println("Enter architect ID: ");
+        int architectId = scanner.nextInt();
+        System.out.println("Enter customer ID: ");
+        int customerId = scanner.nextInt();
+        scanner.nextLine();  // Consume newline
+
+        String query = "INSERT INTO Project (project_name, deadline, start_date, completion_date, engineer_id, manager_id, architect_id, customer_id) VALUES (?, ?, ?, NULL, ?, ?, ?, ?)";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, projectName);
+            statement.setString(2, deadline);
+            statement.setString(3, startDate);
+            statement.setInt(4, engineerId);
+            statement.setInt(5, managerId);
+            statement.setInt(6, architectId);
+            statement.setInt(7, customerId);
+            statement.executeUpdate();
+        }
+    }
+
+    /**
+     * Updates information about an existing project.
+     */
+    private static void updateProject(Connection connection, Scanner scanner) throws SQLException {
+        System.out.println("Enter project ID to update: ");
+        int projectId = scanner.nextInt();
+        scanner.nextLine();  // Consume newline
+        System.out.println("Enter new project name: ");
+        String projectName = scanner.nextLine();
+        System.out.println("Enter new deadline (YYYY-MM-DD): ");
+        String deadline = scanner.nextLine();
+        System.out.println("Enter new start date (YYYY-MM-DD): ");
+        String startDate = scanner.nextLine();
+        System.out.println("Enter new engineer ID: ");
+        int engineerId = scanner.nextInt();
+        System.out.println("Enter new manager ID: ");
+        int managerId = scanner.nextInt();
+        System.out.println("Enter new architect ID: ");
+        int architectId = scanner.nextInt();
+        System.out.println("Enter new customer ID: ");
+        int customerId = scanner.nextInt();
+        scanner.nextLine();  // Consume newline
+
+        String query = "UPDATE Project SET project_name = ?, deadline = ?, start_date = ?, engineer_id = ?, manager_id = ?, architect_id = ?, customer_id = ? WHERE project_id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, projectName);
+            statement.setString(2, deadline);
+            statement.setString(3, startDate);
+            statement.setInt(4, engineerId);
+            statement.setInt(5, managerId);
+            statement.setInt(6, architectId);
+            statement.setInt(7, customerId);
+            statement.setInt(8, projectId);
+            statement.executeUpdate();
+        }
+    }
+
+    /**
+     * Deletes a project from the database.
+     */
+    private static void deleteProject(Connection connection, Scanner scanner) throws SQLException {
+        System.out.println("Enter project ID to delete: ");
+        int projectId = scanner.nextInt();
+
+        String query = "DELETE FROM Project WHERE project_id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, projectId);
+            statement.executeUpdate();
+        }
+    }
+
+    /**
+     * Finalises an existing project by marking it as finalised and setting the completion date.
+     */
+    private static void finaliseProject(Connection connection, Scanner scanner) throws SQLException {
+        System.out.println("Enter project ID to finalise: ");
+        int projectId = scanner.nextInt();
+
+        String query = "UPDATE Project SET finalised = 1, completion_date = CURDATE() WHERE project_id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, projectId);
+            statement.executeUpdate();
+        }
+    }
+
+    /**
+     * Finds and prints all projects that still need to be completed.
+     */
+    private static void findIncompleteProjects(Connection connection) throws SQLException {
+        String query = "SELECT * FROM Project WHERE finalised = 0";
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            while (resultSet.next()) {
+                System.out.println("Incomplete Project ID: " + resultSet.getInt("project_id"));
+                System.out.println("Project Name: " + resultSet.getString("project_name"));
+                // Print other details...
+            }
+        }
+    }
+
+    /**
+     * Finds and prints all projects that are past their due date.
+     */
+    private static void findPastDueProjects(Connection connection) throws SQLException {
+        String query = "SELECT * FROM Project WHERE deadline < CURDATE() AND finalised = 0";
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            while (resultSet.next()) {
+                System.out.println("Past Due Project ID: " + resultSet.getInt("project_id"));
+                System.out.println("Project Name: " + resultSet.getString("project_name"));
+                // Print other details...
+            }
+        }
+    }
+
+    /**
+     * Finds and prints a project by its number or name.
+     */
+    private static void findProject(Connection connection, Scanner scanner) throws SQLException {
+        System.out.println("Enter project number or name: ");
+        String input = scanner.nextLine();
+
+        String query;
+        if (input.matches("\\d+")) {
+            query = "SELECT * FROM Project WHERE project_id = ?";
+        } else {
+            query = "SELECT * FROM Project WHERE project_name = ?";
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            if (input.matches("\\d+")) {
+                statement.setInt(1, Integer.parseInt(input));
+            } else {
+                statement.setString(1, input);
+            }
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    System.out.println("Project ID: " + resultSet.getInt("project_id"));
+                    System.out.println("Project Name: " + resultSet.getString("project_name"));
+                    // Print other details...
+                } else {
+                    System.out.println("Project not found.");
+                }
+            }
+        }
+    }
+}

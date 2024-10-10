@@ -1,0 +1,149 @@
+Difference between Data and Information:
+Data refers to raw facts and figures without context, while information is processed data that has context and meaning.
+
+Definitions:
+a) Data: Raw, unprocessed facts and figures.
+b) Field: A single data element within a record.
+c) Record: A collection of related fields.
+d) File: A collection of related records.
+
+Issues Addressed by DBMS:
+Data Redundancy:
+Issue: Duplication of data across the database.
+DBMS Solution: Normalization techniques are employed to minimize redundancy, ensuring data is stored efficiently without unnecessary repetition.
+
+Data Inconsistency:
+Issue: Inaccurate or conflicting information due to multiple copies of data.
+DBMS Solution: Centralized control and enforcement of data integrity constraints, such as primary and foreign keys, prevent inconsistencies.
+
+Data Isolation:
+Issue: Difficulty in accessing and manipulating data concurrently by multiple users.
+DBMS Solution: Transaction management features, including locking mechanisms, ensure that concurrent transactions do not interfere with each other, maintaining data integrity.
+
+Data Security:
+Issue: Unauthorized access and potential data breaches.
+DBMS Solution: Access control mechanisms, user authentication, and encryption techniques are implemented to safeguard data and restrict access based on user roles and permissions.
+
+Data Integrity:
+Issue: Ensuring accuracy and reliability of data.
+DBMS Solution: Integrity constraints, such as referential integrity and check constraints, are defined and enforced to maintain the accuracy and consistency of data.
+
+Data Concurrency:
+Issue: Simultaneous access and modification of data by multiple users.
+DBMS Solution: Transaction management ensures that multiple transactions can occur concurrently without compromising the consistency of the database. Locking mechanisms control access to data during transactions.
+
+Data Recovery:
+Issue: System failures or errors leading to data loss.
+DBMS Solution: Backup and recovery mechanisms, including periodic backups and transaction logs, allow for the restoration of data in the event of system failures or errors.
+
+Querying and Reporting:
+Issue: Efficient retrieval and reporting of data.
+DBMS Solution: Query languages (e.g., SQL) and reporting tools are provided, allowing users to retrieve and analyze data efficiently.
+
+Common Features of Commercial DBMS:
+
+Data Definition Language (DDL):
+Purpose: Allows users to define the database structure, including tables, relationships, and constraints.
+Example: SQL commands like CREATE TABLE, ALTER TABLE, and DROP TABLE.
+
+Data Manipulation Language (DML):
+Purpose: Enables users to interact with and manipulate data stored in the database.
+Example: SQL commands like SELECT, INSERT, UPDATE, and DELETE.
+
+Query Language:
+Purpose: Provides a standardized way to retrieve information from the database.
+Example: SQL (Structured Query Language) is widely used for querying relational databases.
+
+Transaction Management:
+Purpose: Ensures the integrity and consistency of the database by supporting atomicity, consistency, isolation, and durability (ACID properties) of transactions.
+Example: Commit and Rollback commands in SQL.
+
+Concurrency Control:
+Purpose: Manages multiple users accessing and modifying data simultaneously without conflicting with each other.
+Example: Locking mechanisms to control access to data during transactions.
+Security and Access Control:
+
+Purpose: Protects the database from unauthorized access and ensures data privacy.
+Example: User authentication, authorization, and encryption techniques.
+
+Data Integrity Constraints:
+Purpose: Enforces rules to maintain the accuracy and consistency of data.
+Example: Primary key, foreign key, check constraints.
+
+Backup and Recovery:
+Purpose: Allows for the creation of database backups and the recovery of data in the event of system failures or errors.
+Example: Automated backup schedules and restore procedures.
+
+Sparse Data:
+Sparse data refers to datasets with a significant number of empty or undefined values. It might be found in scenarios where not all data points are applicable or available.
+
+Types of DBMS:
+
+Relational DBMS (RDBMS):
+Hierarchical DBMS:
+Network DBMS
+Object-Oriented DBMS (OODBMS)
+Object-Relational DBMS (ORDBMS)
+Document Store DBMS
+Graph DBMS
+Time-Series DBMS
+Spatial DBMS
+In-Memory DBMS
+Distributed DBMS
+
+Three NoSQL DBMSs:
+
+MongoDB:
+Features:
+Document-Oriented: Stores data in flexible, JSON-like BSON documents.
+Scalability: Horizontally scalable with support for sharding.
+Query Language: Rich and expressive query language with support for indexing.
+Aggregation Framework: Allows for complex data aggregation and transformation.
+Replication: Provides high availability through replica sets.
+Flexibility: Schema-less design allows for dynamic changes to data structure.
+Use Cases: Well-suited for applications with varying data structures, content management systems, and real-time analytics.
+
+Cassandra:
+Features:
+Distributed Architecture: Designed for scalability and fault-tolerance across multiple nodes.
+Column-Family Store: Organizes data into column families for efficient retrieval.
+High Write Performance: Optimized for write-heavy workloads.
+No Single Point of Failure: Achieves fault tolerance through decentralized architecture.
+Query Language: CQL (Cassandra Query Language) resembling SQL for ease of adoption.
+Tunable Consistency: Allows developers to balance between consistency and availability.
+Use Cases: Suitable for time-series data, sensor data, and applications requiring high write throughput.
+
+Redis:
+Features:
+In-Memory Storage: Data is stored in RAM for fast read and write operations.
+Data Structures: Supports various data structures like strings, hashes, lists, sets, and more.
+Persistence: Optional persistence to disk for durability.
+Pub/Sub Messaging: Provides publish/subscribe messaging paradigm.
+Atomic Operations: Supports atomic operations on data structures.
+Partitioning: Allows horizontal scaling through partitioning.
+Use Cases: Caching, real-time analytics, session storage, and message brokering.
+
+ACID Properties:
+
+Atomicity:
+Explanation: Atomicity ensures that a database transaction is treated as a single, indivisible unit. It follows the all-or-nothing principle.
+
+Consistency:
+Explanation: Consistency ensures that a transaction brings the database from one valid state to another. It enforces integrity constraints and rules defined for the database.
+
+Isolation:
+Explanation: Isolation ensures that the execution of multiple transactions concurrently does not lead to data inconsistencies. Each transaction is executed as if it is the only transaction in the system.
+
+Durability:
+Explanation: Durability guarantees that once a transaction is committed, its effects are permanent, and the changes persist even in the face of system failures or crashes.
+
+How many records does the file contain?
+There are four records in the file.
+
+How many fields are there per record?
+Each record consists of five fields:
+PROJECT_CODE
+PROJECT_MANAGER
+MANAGER_PHONE
+MANAGER_ADDRESS
+PROJECT_BID_PRICE
